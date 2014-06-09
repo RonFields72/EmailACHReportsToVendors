@@ -9,7 +9,7 @@ using EmailACHReportsToVendors.Files;
 
 namespace EmailACHReportsToVendors
 {
-      class EmailACHReports
+    class EmailACHReports
     {
         /// <summary>
         /// Email ACH Reports Console Application Entry Point
@@ -17,37 +17,37 @@ namespace EmailACHReportsToVendors
         /// <returns></returns>
         /// </summary>
         public static void Main()
-      {
-        //const string emailSubject = "EFT Deposit - Southwestern Energy Company";
-        //StringBuilder emailBodyText = new StringBuilder();
-        //emailBodyText.Append("Attention Vendor:");
-        //emailBodyText.Append(Environment.NewLine);
-        //emailBodyText.Append("Attached is a report containing the invoice detail information related to an upcoming EFT deposit in your bank account. ");
-        //emailBodyText.Append("The date of deposit will appear in the body of the report.");
-        //emailBodyText.Append(Environment.NewLine);
-        //emailBodyText.Append(Environment.NewLine);
-        //emailBodyText.Append("If you have questions regarding this report, please contact our Accounts Payable department at 479-582-8630.");
-        //string emailBody = System.Convert.ToString(emailBodyText);
+        {
+            //const string emailSubject = "EFT Deposit - Southwestern Energy Company";
+            //StringBuilder emailBodyText = new StringBuilder();
+            //emailBodyText.Append("Attention Vendor:");
+            //emailBodyText.Append(Environment.NewLine);
+            //emailBodyText.Append("Attached is a report containing the invoice detail information related to an upcoming EFT deposit in your bank account. ");
+            //emailBodyText.Append("The date of deposit will appear in the body of the report.");
+            //emailBodyText.Append(Environment.NewLine);
+            //emailBodyText.Append(Environment.NewLine);
+            //emailBodyText.Append("If you have questions regarding this report, please contact our Accounts Payable department at 479-582-8630.");
+            //string emailBody = System.Convert.ToString(emailBodyText);
 
 
-         string exceptionEmail = ConfigurationManager.AppSettings.Get("APExceptionEmailAddress");
-                    
+            string exceptionEmail = ConfigurationManager.AppSettings.Get("APExceptionEmailAddress");
+            string testString = "hello world";
 
-         //Get output paths
-         string achDirectory = ConfigurationManager.AppSettings.Get("ACHReportDirectory");
-         string auditDirectory = ConfigurationManager.AppSettings.Get("AuditReportDirectory");
-         string achArchiveDir = ConfigurationManager.AppSettings.Get("ACHArchiveDirectory");
+            //Get output paths
+            string achDirectory = ConfigurationManager.AppSettings.Get("ACHReportDirectory");
+            string auditDirectory = ConfigurationManager.AppSettings.Get("AuditReportDirectory");
+            string achArchiveDir = ConfigurationManager.AppSettings.Get("ACHArchiveDirectory");
         
-         // Check to see if ACH directory exists on the server
-         if (FileHelper.DirectoryExists(achDirectory)) 
-         {
-             //Create a list of PDF's from the directory
-             DirectoryInfo dir = new DirectoryInfo(achDirectory);
-             FileInfo[] fileInfo = dir.GetFiles("*.pdf");
-             string achFileName;
-             string vendorEmailAddress;
-             string vendorNumber;
-             ODSProvider ods = new ODSProvider();   
+            // Check to see if ACH directory exists on the server
+            if (FileHelper.DirectoryExists(achDirectory)) 
+            {
+                //Create a list of PDF's from the directory
+                DirectoryInfo dir = new DirectoryInfo(achDirectory);
+                FileInfo[] fileInfo = dir.GetFiles("*.pdf");
+                string achFileName;
+                string vendorEmailAddress;
+                string vendorNumber;
+                ODSProvider ods = new ODSProvider();   
       
             // For each PDF the vendor number must be extracted from the file name
             // Once the number is retrieved then the vendors email address will be pulled from
