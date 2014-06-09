@@ -6,9 +6,8 @@ namespace EmailACHReportsToVendors.DAL
 {
     public class ODSProvider : DataAccessBase
     {
-      
         #region Constructor
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ODSProvider"/> class.
         /// </summary>
@@ -16,10 +15,11 @@ namespace EmailACHReportsToVendors.DAL
         {
             this.ConnectionString = ConfigurationManager.ConnectionStrings["cnODS"].ConnectionString;
         }
-
+        
         #endregion
-
+        
         #region Public Members
+        
         /// <summary>
         /// Gets the vendor email.
         /// </summary>
@@ -29,7 +29,7 @@ namespace EmailACHReportsToVendors.DAL
             // Build query string
             string sqlString = "SELECT Entity_ID, Entity_Type, Email_Address FROM Entity_Contact WHERE Entity_Type = 'VENDOR' and Entity_ID = '" + vendorNumber + "'";
             string emailAddress = "";
-
+            
             // Create and open the connection to ODS 
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
@@ -44,15 +44,11 @@ namespace EmailACHReportsToVendors.DAL
                     }
                     dr.Close();
                 }
-                
             }
-
+        
             return emailAddress;
-            
         }
 
         #endregion
-
-       
     }
 }

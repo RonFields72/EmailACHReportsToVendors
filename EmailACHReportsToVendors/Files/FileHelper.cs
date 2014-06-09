@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-
 namespace EmailACHReportsToVendors.Files
 {
     public class FileHelper
     {
         #region Static Methods
-
+        
         /// <summary>
         /// Determines if the directory exist.
         /// </summary>
@@ -26,8 +25,7 @@ namespace EmailACHReportsToVendors.Files
                 return false;
             }
         }
-
-
+        
         /// <summary>
         /// Gets the folder name by extracting the date portion of the file name.
         /// This is the subdirectory where the PDF file should be archived.
@@ -41,10 +39,10 @@ namespace EmailACHReportsToVendors.Files
             int strPos = 0;
             int len = fileName.IndexOf("_");
             string folder = fileName.Substring(strPos, len);
-
+            
             return folder;
         }
-
+        
         /// <summary>
         /// The normal PDF archival method.
         /// </summary>
@@ -64,12 +62,11 @@ namespace EmailACHReportsToVendors.Files
             catch (Exception ex)
             {
                 // The folder already exists so don't create it
-                
             }
-
+            
             // Create destination path
             string destFullPath = archiveDirectory + "\\" + newSubFolder + "\\" + pdfFile.Name;
-
+            
             // Move the file to the archive directory
             try
             {
@@ -80,8 +77,7 @@ namespace EmailACHReportsToVendors.Files
                 // Unable to move the PDF to the archive
             }
         }
-
-
+        
         /// <summary>
         /// Archives the exception report.
         /// The name of the PDF file is modified to make it easier to identify.
@@ -90,7 +86,6 @@ namespace EmailACHReportsToVendors.Files
         /// <param name="archiveDirectory">The archive directory.</param>
         public static void ArchiveException(FileInfo pdfFile, string archiveDirectory)
         {
-        
             // Create a new subdirectory in the archive directory 
             // This is based on the date of the report being archived
             DirectoryInfo di = new DirectoryInfo(archiveDirectory);
@@ -104,13 +99,13 @@ namespace EmailACHReportsToVendors.Files
             {
                 // The folder already exists so don't create it
             }
-
+            
             // Create destination path
             // Insert _EXCEPT into file name
             // This will make it easier to identify as an exception in the archive folder
             string destFileName = archiveFileName.Insert(archiveFileName.IndexOf("."), "_EXCEPT");
             string destFullPath = archiveDirectory + "\\" + newSubFolder + "\\" + destFileName;
-           
+            
             // Move the file to the archive directory
             try
             {
@@ -118,11 +113,9 @@ namespace EmailACHReportsToVendors.Files
             }
             catch (Exception ex)
             {
-                
-              
             }
         }
-
+        
         /// <summary>
         /// Parse the vendor number from the PDF file name.
         /// </summary>
@@ -131,19 +124,17 @@ namespace EmailACHReportsToVendors.Files
         public static string ParseVendorNumber(string filename)
         {
             string vendorNumber;
-
+            
             // Parse the vendor number from the file name string
             // file name format = [date]_[sequence number]_[vendor number].pdf
             int endPos = filename.IndexOf(".");
             int strPos = filename.LastIndexOf("_") + 1;
             int len = endPos - strPos;
             vendorNumber = filename.Substring(strPos, len);
-
+            
             return vendorNumber;
         }
-
-  
+    
         #endregion
-
     }
 }
